@@ -16,15 +16,15 @@ Part 2 (iterative):
 -V&V  
 
 Part 3:  
-engine 1 - search  
-engine 2 - recommender  
-engine 3 - profiler  
-4x4 tile forecast  
+-engine 1 - search  
+-engine 2 - recommender  
+-engine 3 - profiler  
+-4x4 tile forecast  
 
 Part 4:  
-tracking metrics  
-visualizations  
-web app  
+-metrics  
+-visualizations  
+-web app  
 
 [forfree.and.opensource® + DO NOT DEPLOY (yet)™ + attribution a must ©©]    
 
