@@ -2,8 +2,8 @@
 
 NLP experimental work.  Generalized block diagram:
 
-doc scraping
-data carpentry
+doc scraping  
+data carpentry  
 (almost) champion model available (tools folder), pending validation testing - training metrics & summary notes of approach/progress - located in notebooks in /src & /tools folders. 
 
 latest functional code w/ training results, validation testing tool, and "movies" 📽🍿 @ tool_flacs_v*.ipynb  
