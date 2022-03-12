@@ -3,18 +3,17 @@
 LCP experimental work.  Generalized block diagram:
 
 Part 1:
-doc scraping  
-entity extraction  
-text counts/stats  
-word cloud  
-data carpentry  
+-doc scraping  
+-entity extraction  
+-text counts/stats  
+-word cloud  
 
-Part 2:  
-data carpentry  
-schema making  
-queries building  
-algorithm running  
-V&V  
+Part 2 (iterative):  
+-data carpentry  
+-schema making  
+-queries building  
+-algorithm running  
+-V&V  
 
 Part 3:  
 engine 1 - search  
