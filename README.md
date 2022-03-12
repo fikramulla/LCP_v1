@@ -10,22 +10,22 @@ word cloud
 data carpentry  
 
 Part 2:  
-data carpentry
-schema making
-queries building
-algorithm running
-V&V
+data carpentry  
+schema making  
+queries building  
+algorithm running  
+V&V  
 
-Part 3:
-search engine  
-recommendation engine
-risk profile engine  
-4x4 tile forecast
+Part 3:  
+engine 1 - search  
+engine 2 - recommender  
+engine 3 - profiler  
+4x4 tile forecast  
 
 Part 4:  
 tracking metrics  
-visualizations
-web app
+visualizations  
+web app  
 
 [forfree.and.opensource® + DO NOT DEPLOY (yet)™ + attribution a must ©©]    
 
