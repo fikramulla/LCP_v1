@@ -1,6 +1,6 @@
 # LCP_v1
 
-NLP experimental work.  Generalized block diagram:
+LCP experimental work.  Generalized block diagram:
 
 Part 1:
 doc scraping  
