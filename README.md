@@ -2,8 +2,9 @@
 
 LCP experimental work.  Generalized block diagram:
 
-Part 1:
+Part 1:  
 -doc scraping  
+-data formatting (prelim, csv)*  
 -entity extraction  
 -text counts/stats  
 -word cloud  
