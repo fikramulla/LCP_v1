@@ -1,4 +1,4 @@
-#continued from nlp_edge_doc8.R - where only one page, and manual images
+#continued from nlp_edge_doc1.R - where only one page, and manual images
 #this attempts to get all the info from all pages of 1 doc, auto-capture
 #all plots, and get it ready to run through my python creat_edge_list
 #03/22/2022
@@ -18,12 +18,12 @@ library(sqldf)
 #*************
 #LOAD, READ, PROCESS, EXTRACT
 #*************
-#read structured csv of doc x (one row per page - doc8 has 52 rows)
+#read structured csv of doc x (one row per page - doc1 has 52 rows)
 text <- read.csv("doc1.csv")
 txt <- data.frame(matrix(ncol = 1, nrow = 0))  #initialize
 colnames(txt) <- c('text')
 
-#special for doc8
+#special for docx
 txt <- text[,3]
 docs <- Corpus(VectorSource(txt))
 docs <- tm_map(docs, removeNumbers)
@@ -41,7 +41,7 @@ d <- data.frame(word = names(v),freq=v)
 
 
 # for(i in 1:nrow(text)) {
-#   txt[i,] <- text[i,3]  #select text column of doc8.csv (3rd column), per page
+#   txt[i,] <- text[i,3]  #select text column of doc1.csv (3rd column), per page
 #   docs <- Corpus(VectorSource(txt))  #this does all pages at once
 #   docs <- tm_map(docs, content_transformer(tolower))
 #   docs <- tm_map(docs, removeNumbers)
@@ -59,13 +59,15 @@ d <- data.frame(word = names(v),freq=v)
 #word count
 d1 <- d[1:20,]
 
-#sentiment
-d2 <- as.character(txt)
-d3 <-get_nrc_sentiment(d2)
-td<-data.frame(t(d3))
-td <- cbind(rownames(td), td)
-colnames(td) <- c("sentiment","count")
-rownames(td) <- NULL
+#sentiments per page (d3) and summed across whole document (d4)
+#d2 <- as.character(txt)
+d3 <-get_nrc_sentiment(txt)
+d4 <- as.data.frame(colSums(d3))
+#td<-data.frame(t(d3))
+d4 <- cbind(rownames(d4), d4)
+colnames(d4) <- c("sentiment","count")
+rownames(d4) <- NULL
+
 
 #*************
 #search/count of sdgs
@@ -96,39 +98,39 @@ i = grep("peace", d$word) ; sdg[16,3] <- d[i[1],]$freq
 #VISUALIZATIONS
 #********
 #word counts
-png("counts_doc8.png")
+png("counts_doc1.png")
 barplot(d[1:20,]$freq, las = 2, names.arg = d[1:20,]$word,
         col ="lightblue", main ="Most frequent words (rank 1-20)",
         ylab = "Word frequencies")
 dev.off()
 
 #lollipops of top 20 word counts
-png("lolli_doc8.png", width = 1080, height = 480)
+png("lolli_doc1.png", width = 1080, height = 480)
 ggplot(d1, aes(x=word, y=freq)) +
   geom_segment( aes(x=word, xend=word, y=0, yend=freq)) +
   geom_point( size=5, color="red", fill=alpha("orange", 0.3), alpha=0.7, shape=21, stroke=2) 
 dev.off()
 
 #sentiment
-td1<-td[1:8,]
-png("sentim_doc8.png")
+td1<-d4[1:8,]
+png("sentim_doc1.png")
 ggplot(data=td1, aes(x=sentiment, y=count, fill=sentiment)) +
   geom_bar(stat="identity")
 dev.off()
-td2<-td[9:10,]
-png("posneg_doc8.png")
+td2<-d4[9:10,]
+png("posneg_doc1.png")
 ggplot(data=td2, aes(x=sentiment, y=count, fill=sentiment)) +
   geom_bar(stat="identity")
 dev.off()
 
 #sdg's
 #barplot of sdgs
-png("sdglist_doc8.png", width = 1080, height = 480)
+png("sdglist_doc1.png", width = 1080, height = 480)
 ggplot(data=sdg, aes(x=SDG, y=weight, fill=SDG)) +
   geom_bar(stat="identity")
 dev.off()
 #lollipops of sdgs in this page
-png("lollisdglist_doc8.png", width = 1080, height = 480)
+png("lollisdglist_doc1.png", width = 1080, height = 480)
 ggplot(sdg, aes(x=SDG, y=weight)) +
   geom_segment( aes(x=SDG, xend=SDG, y=0, yend=weight)) +
   geom_point( size=5, color="darkgreen", fill=alpha("green", 0.3), alpha=0.7, shape=21, stroke=2) 
@@ -137,11 +139,11 @@ dev.off()
 #********
 #CSV OUTPUTS
 #********
-write.csv(d, "total_doc8.csv", row.names = FALSE)
-write.csv(d1, "counts_doc8.csv", row.names = FALSE)
-write.csv(td1, "sentim_doc8.csv", row.names = FALSE)
-write.csv(td2, "posneg_doc8.csv", row.names = FALSE)
-write.csv(sdg, "sdglist_doc8.csv", row.names = FALSE)
+write.csv(d, "total_doc1.csv", row.names = FALSE)
+write.csv(d1, "counts_doc1.csv", row.names = FALSE)
+write.csv(td1, "sentim_doc1.csv", row.names = FALSE)
+write.csv(td2, "posneg_doc1.csv", row.names = FALSE)
+write.csv(sdg, "sdglist_doc1.csv", row.names = FALSE)
 
 #now go to python to create edgelist...
 

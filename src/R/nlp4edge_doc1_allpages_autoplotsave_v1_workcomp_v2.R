@@ -19,7 +19,7 @@ library(sqldf)
 #LOAD, READ, PROCESS, EXTRACT
 #*************
 #read structured csv of doc x (one row per page - doc_1 has 52 rows, doc_8 has 3949 rows aka pages)
-text <- read.csv("./dat/doc1.csv")
+text <- read.csv("./dat/doc6.csv")
 txt <- data.frame(matrix(ncol = 1, nrow = 0))  #initialize
 colnames(txt) <- c('text')
 
@@ -98,14 +98,14 @@ i = grep("peace", d$word) ; sdg[16,3] <- d[i[1],]$freq
 #OUTPUTS & VISUALIZATIONS
 #********
 #word counts
-png("./img_out/counts_doc1.png")
+png("./img_out/counts_doc6.png")
 barplot(d[1:20,]$freq, las = 2, names.arg = d[1:20,]$word,
         col ="lightblue", main ="Most frequent words (rank 1-20)",
         ylab = "Word frequencies")
 dev.off()
 
 #lollipops of top 20 word counts
-png("./img_out/lolli_doc1.png", width = 1080, height = 480)
+png("./img_out/lolli_doc6.png", width = 1080, height = 480)
 ggplot(d1, aes(x=word, y=freq)) +
   geom_segment( aes(x=word, xend=word, y=0, yend=freq)) +
   geom_point( size=5, color="red", fill=alpha("orange", 0.3), alpha=0.7, shape=21, stroke=2) 
@@ -113,24 +113,24 @@ dev.off()
 
 #sentiment
 td1<-d4[1:8,]
-png("./img_out/sentim_doc1.png")
+png("./img_out/sentim_doc6.png")
 ggplot(data=td1, aes(x=sentiment, y=count, fill=sentiment)) +
   geom_bar(stat="identity")
 dev.off()
 td2<-d4[9:10,]
-png("./img_out/posneg_doc1.png")
+png("./img_out/posneg_doc6.png")
 ggplot(data=td2, aes(x=sentiment, y=count, fill=sentiment)) +
   geom_bar(stat="identity")
 dev.off()
 
 #sdg's
 #barplot of sdgs
-png("./img_out/sdglist_doc1.png", width = 1080, height = 480)
+png("./img_out/sdglist_doc6.png", width = 1080, height = 480)
 ggplot(data=sdg, aes(x=SDG, y=weight, fill=SDG)) +
   geom_bar(stat="identity")
 dev.off()
 #lollipops of sdgs in this page
-png("./img_out/lollisdglist_doc1.png", width = 1080, height = 480)
+png("./img_out/lollisdglist_doc6.png", width = 1080, height = 480)
 ggplot(sdg, aes(x=SDG, y=weight)) +
   geom_segment( aes(x=SDG, xend=SDG, y=0, yend=weight)) +
   geom_point( size=5, color="darkgreen", fill=alpha("green", 0.3), alpha=0.7, shape=21, stroke=2) 
@@ -139,11 +139,11 @@ dev.off()
 #********
 #CSV OUTPUTS
 #********
-write.csv(d, "./csv_out/total_doc1.csv", row.names = FALSE)
-write.csv(d1, "./csv_out/counts_doc1.csv", row.names = FALSE)
-write.csv(td1, "./csv_out/sentim_doc1.csv", row.names = FALSE)
-write.csv(td2, "./csv_out/posneg_doc1.csv", row.names = FALSE)
-write.csv(sdg, "./csv_out/sdglist_doc1.csv", row.names = FALSE)
+write.csv(d, "./csv_out/total_doc6.csv", row.names = FALSE)
+write.csv(d1, "./csv_out/counts_doc6.csv", row.names = FALSE)
+write.csv(td1, "./csv_out/sentim_doc6.csv", row.names = FALSE)
+write.csv(td2, "./csv_out/posneg_doc6.csv", row.names = FALSE)
+write.csv(sdg, "./csv_out/sdglist_doc6.csv", row.names = FALSE)
 
 #now go to python to create edgelist...
 
